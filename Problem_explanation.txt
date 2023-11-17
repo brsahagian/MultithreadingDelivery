@@ -1,0 +1,14 @@
+ ////////////WELCOME TO THE FEDOOPS DELIVERY SERVICE !! \\\\\\\\\\\\
+ 
+ >> We base our execution off of two essential structs: Package & Worker.
+ 
+ >> Package struct is a struct which contains package information and a series of customer instructions housed in a flexible array member. Package struct has package_id and package_inst[].
+ >> Worker struct is a struct which contains worker information including number and color.
+ 
+ >> We use condition variables, mutex locking mechanisms, and the pthreads API to solve this problem.
+ 
+ The package struct uses its flexible array member and the choices[4] array to randomly generate its array of instructions. This package creation simulates a customer's choice of package operations to send to the FedOops company. We model this customer decision with the createPackage function and the internally called hasChoice function. After randomly populating the array bound and contents, the package is fully generated. 
+ 
+ We have 4 team queues that are associated with each color ('r', 'g', 'b', 'y'). We pull the workers off these queues in the order they were put on the queues by first enqueueing and then dequeuing within a lock so that the order is correct.
+ 
+ We have individual and shared mutexes/condition variables. Some examples of the shared mutexes involve the &shared and &shared2 mutexes that limit the stations. Whereas, individual mutexes like &worker is specific to one team.
